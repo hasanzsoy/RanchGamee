@@ -16,19 +16,20 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        SwipeCheck();
+    }
 
-
+    private void SwipeCheck() 
+    {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
         {
             //Debug.Log(Input.GetTouch(0).deltaPosition.x / Screen.width);
             touchXDelta = Input.GetTouch(0).deltaPosition.x / Screen.width;
         }
-        //else if (Input.GetMouseButton(0))
-        //{
-        //    touchXDelta = Input.GetAxis("Mouse X");
-        //}
-
-
+        else if (Input.GetMouseButton(0))
+        {
+            touchXDelta = Input.GetAxis("Mouse X");
+        }
 
         newX = transform.position.x + xSpeed * touchXDelta * Time.deltaTime;
         newX = Mathf.Clamp(newX, -limitX, limitX);
